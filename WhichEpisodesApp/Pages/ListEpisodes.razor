@@ -1,0 +1,186 @@
+﻿@using System.Web
+
+@page "/Episodes/{actorName}/{showId}"
+
+@inject IHttpClientFactory _clientFactory
+@inject NavigationManager NavigationManager
+@inject IConfiguration Configuration
+
+<PageTitle>List Episodes</PageTitle>
+<head>
+    @*google font monsterrat*@
+
+</head>
+
+<button class="btn btn-warning" @onclick="returnHome">Return Home</button>
+<hr />
+
+<h3>Episode List</h3>
+
+@if (tvshowinfo is null)
+{
+    @*<div class="h4">loading...</div>*@
+    <div class="lds-dual-ring"></div>
+}
+else
+{
+    <div class="row">
+    @foreach (var c in episodeInfo)
+    {
+        <div class="col-sm-4">
+            <div class="card mb-3" style="max-width: 540px;">
+                <img src="@String.Format("https://image.tmdb.org/t/p/w300{0}", c.Item4)" alt="Image Unavailable">
+                @*<div class="card-header">
+                    <h3>@c.Item1</h3>
+                </div>*@
+                <div class="card-body">
+                    <h4 class="card-title">@c.Item1</h4>
+                    <h6>Season @c.Item2 Episode @c.Item3</h6>
+                    <p class="card-text">@c.Item5</p>
+                </div>
+            </div>
+
+        </div>
+    }
+    </div>
+}
+@code {
+
+    TVShowInfoModel tvshowinfo;
+    TVEpisodeCreditsModel episodecredits;
+    TVEpisodeInfoModel episodeinfo;
+
+    string errorString;
+
+    [Parameter]
+    public string actorName { get; set; }
+    [Parameter]
+    public string showId { get; set; }
+
+    public List<int> seasons = new List<int>();
+    public List<int> numEpisodes = new List<int>();
+    //list of episodes the actor appears in
+    public List<string> episodeList = new List<string>();
+    //list of still from that episode
+    public List<string> episodeStills = new List<string>();
+    //tuple that contains episode name, season number, episode number, still, overview
+    //Tuple<string, int, int, string, string>[] episodeInfo;
+    public List<(string, int, int, string, string)> episodeInfo = new List<(string, int, int, string, string)>();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        var showid = showId;
+        var tmdbApiKey = Configuration["API_key"];
+
+        var request3 = new HttpRequestMessage(HttpMethod.Get,
+        $"https://api.themoviedb.org/3/tv/{showId}?api_key="+ tmdbApiKey + "&language=en-US");
+
+        var client3 = _clientFactory.CreateClient();
+
+        HttpResponseMessage response3 = await client3.SendAsync(request3);
+
+        if (response3.IsSuccessStatusCode)
+        {
+            tvshowinfo = await response3.Content.ReadFromJsonAsync<TVShowInfoModel>();
+            errorString = null;
+        }
+        else
+        {
+            errorString = $"There was an errror: {response3.ReasonPhrase}";
+        }
+
+        saveTVShowInfoInLists();
+
+        int j = 0;
+        foreach (var season in seasons)
+        {
+            //int seasonNum = seasons[j];
+            for (int i = 1; i <= numEpisodes[j]; i++)
+            {
+                var request4 = new HttpRequestMessage(HttpMethod.Get,
+        $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{i}/credits?api_key=" + tmdbApiKey + "&language=en-US");
+
+                HttpResponseMessage response4 = await client3.SendAsync(request4);
+
+                if (response4.IsSuccessStatusCode)
+                {
+                    episodecredits = await response4.Content.ReadFromJsonAsync<TVEpisodeCreditsModel>();
+                    errorString = null;
+                }
+                else
+                {
+                    errorString = $"error: {response4.ReasonPhrase}";
+                }
+
+                //check that actor is in episode
+                foreach (var c in episodecredits.episodeCast)
+                {
+                    if (c.actorName == actorName)
+                    {
+                        //do the other get request to get episode info
+                        var request5 = new HttpRequestMessage(HttpMethod.Get,
+        $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{i}?api_key=" + tmdbApiKey + "&language=en-US");
+
+                        HttpResponseMessage response5 = await client3.SendAsync(request5);
+
+                        if (response5.IsSuccessStatusCode)
+                        {
+                            episodeinfo = await response5.Content.ReadFromJsonAsync<TVEpisodeInfoModel>();
+                            errorString = null;
+                            //var episodetuple = Tuple.Create(episodeinfo.episodeName, episodeinfo.seasonNumber, episodeinfo.episodeNumber, episodeinfo.stillPath, episodeinfo.overview);
+                            episodeInfo.Add((episodeinfo.episodeName, episodeinfo.seasonNumber, episodeinfo.episodeNumber, episodeinfo.stillPath, episodeinfo.overview));
+                        }
+                        else
+                        {
+                            errorString = $"error: {response5.ReasonPhrase}";
+                        }
+                    }
+                }
+
+            }
+            j++;
+        }
+
+    }
+
+    //tried an async function to put in the loop...didn't work. something to follow up on
+
+    public async void SendRequestAsync(string showId, int counteri, int season)
+    {
+        var client4 = _clientFactory.CreateClient();
+
+        var request4 = new HttpRequestMessage(HttpMethod.Get,
+        $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{counteri}/credits?api_key=c8894f1bb561c45b2d987daeca10672d&language=en-US");
+
+        HttpResponseMessage response4 = await client4.SendAsync(request4);
+
+        if (response4.IsSuccessStatusCode)
+        {
+            episodecredits = await response4.Content.ReadFromJsonAsync<TVEpisodeCreditsModel>();
+            errorString = null;
+        }
+        else
+        {
+            errorString = $"error: {response4.ReasonPhrase}";
+        }
+    }
+
+
+    void saveTVShowInfoInLists()
+    {
+        foreach (var a in tvshowinfo.TVseason)
+        {
+            seasons.Add(a.seasonNumber);
+            numEpisodes.Add(a.episodeCount);
+        }
+    }
+
+    void returnHome()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+}
+
+
+

@@ -1,0 +1,167 @@
+﻿@using System.Web
+@page "/"
+
+@inject IHttpClientFactory _clientFactory
+@inject NavigationManager NavigationManager
+@inject IConfiguration Configuration 
+
+<PageTitle>Which Episodes</PageTitle>
+<head>
+    @*google font monterrat*@
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Montserrat">
+   
+</head>
+<body>
+    <div class="allPagesStyle">
+        <h1>Enter a TV Actor's name</h1>
+    <div class="actor-input">
+        <search type="text" id="textEntry" name="textEntry">Search for an actor:</search>
+        <input type="text" @bind="enteredActorName" />
+        <button class="btn btn-warning" @onclick="OnInitializedAsync">Submit</button>
+    </div>
+
+
+
+    @if (string.IsNullOrWhiteSpace(errorString) == false)
+    {
+        <div class="h2">errorString</div>
+        }
+        else if (actor is null)
+        {
+            <div></div>
+        }
+        else
+        {
+        <h3>@actorNameFromAPI</h3>
+        <div class="container">
+            <div class="row">
+                @foreach (var x in tvcredits.creditsCast)
+                {
+                    <div class="col-sm-4">
+                        @*<div class="card-columns-fluid">*@
+                        <div class="card">
+                            @*<div class="card-body">*@
+                            @*note this formatting to concatenate a string to get the poster path for each show*@
+                            <button class="btn btn-light" @onclick="@(e => chooseTVShow(@actorNameFromAPI, @x.showId))"> <img src="@String.Format("https://image.tmdb.org/t/p/w300{0}", x.posterPath)"></button>
+                            @*</div>*@
+                        </div>
+                        @*</div>*@
+                    </div>
+
+                }
+            </div>
+        </div>
+
+    }
+</div>
+</body>
+
+@code {
+
+    //var tmdbApiKey = _config["API_key"];
+    //public readonly IConfiguration _config;
+
+
+    ActorModel actor;
+    PersonTVCreditsModel tvcredits;
+
+
+    string? errorString;
+
+
+    public string? enteredActorName;
+    public string? encodedActorName;
+    public string? actorNameFromAPI;
+    public List<int> actorIdList = new List<int>();
+    public List<string> actorNameList = new List<string>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        var tmdbApiKey = Configuration["API_key"];
+
+        if (enteredActorName != null)
+        {
+            //@*encode actor name*@
+            //encodeActorName;
+            var encodedName = Uri.EscapeDataString(enteredActorName);
+
+            //http request for actor info
+            //var request = new HttpRequestMessage(HttpMethod.Get,
+            //"http://api.tmdb.org/3/search/person?api_key=c8894f1bb561c45b2d987daeca10672d&query=" + encodedName);
+            var request = new HttpRequestMessage(HttpMethod.Get,
+                "http://api.tmdb.org/3/search/person?api_key=" + tmdbApiKey + "&query=" + encodedName);
+            var client = _clientFactory.CreateClient();
+
+            HttpResponseMessage response = await client.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                actor = await response.Content.ReadFromJsonAsync<ActorModel>();
+                errorString = null;
+            }
+            else
+            {
+                errorString = $"There was an errror: {response.ReasonPhrase}";
+            }
+
+            //save actors with searched name and their Ids to lists
+            try
+            {
+                actorIdList.Clear();
+                actorNameList.Clear();
+                foreach (var w in actor.results)
+                {
+                    actorIdList.Add(w.id);
+                    actorNameList.Add(w.name);
+                }
+            }
+            catch (Exception e)
+            {
+                errorString = $"error: {e}";
+            }
+
+            //the top result is the most popular one. So the first name/id is the one we will go with
+            //we are choosing the "best" result for the user
+            actorNameFromAPI = actorNameList[0];
+
+            //search the actor's TV credits
+            var request2 = new HttpRequestMessage(HttpMethod.Get,
+                "https://api.themoviedb.org/3/person/" + actorIdList[0] + "/tv_credits?api_key="+ tmdbApiKey + "&language=en-US");
+
+            //var client2 = _clientFactory.CreateClient();
+
+            HttpResponseMessage response2 = await client.SendAsync(request2);
+
+            if (response2.IsSuccessStatusCode)
+            {
+                tvcredits = await response2.Content.ReadFromJsonAsync<PersonTVCreditsModel>();
+                errorString = null;
+            }
+            else
+            {
+                errorString = $"There was an errror: {response2.ReasonPhrase}";
+            }
+
+
+
+        }
+    }
+
+
+    //this method is called when the TV show image button is clicked and it brings the
+    //user to a new page that will show all the episodes the actor appears in
+    void chooseTVShow(string actorName, int showId)
+    {
+        //var id = showId;
+        //send showID to next page
+        //switch pages
+        NavigationManager.NavigateTo($"/Episodes/{actorName}/{showId}");
+    }
+
+
+}
+
+
