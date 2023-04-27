@@ -15,7 +15,6 @@ body > * {
 
 .card {
     margin: 5% auto;
-    //padding: 0rem;
     max-width: 300px;
 }
 
@@ -56,9 +55,9 @@ h3 {
     content: " ";
     display: block;
     border: 6px solid silver;
-    border-color: #fff transparent #fff transparent;
-    width: 64px;
-    height: 64px;
+    border-color: black transparent black transparent;
+    width: 55px;
+    height: 55px;
     margin: 8px;
     animation: lds-dual-ring 1.2s linear infinite;
 }

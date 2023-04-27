@@ -206,11 +206,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/margaret/Projects/WhichEpisodesApp/WhichEpisodesApp/WhichEpisodesApp.csproj",
+      "projectUniqueName": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/WhichEpisodesApp.csproj",
       "projectName": "WhichEpisodesApp",
-      "projectPath": "/Users/margaret/Projects/WhichEpisodesApp/WhichEpisodesApp/WhichEpisodesApp.csproj",
+      "projectPath": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/WhichEpisodesApp.csproj",
       "packagesPath": "/Users/margaret/.nuget/packages/",
-      "outputPath": "/Users/margaret/Projects/WhichEpisodesApp/WhichEpisodesApp/obj/",
+      "outputPath": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/margaret/.nuget/NuGet/NuGet.Config"

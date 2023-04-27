@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "U1I7lLg7vvw+gE8xUZc+YcauSChHJZ4C6Oz51eQ+tETDM6fVL8K4B7eeIDD8bPmyVATrJeKgjR86BI7wD45M+g==",
+  "dgSpecHash": "NVMb+bYPvQMP/JrTcOEE+5GAuhwmvpE3qZad7sAM7ZZRSA981OqBDnlDMOZlCqlqKcMRMCct/8erKDO5gkTJFg==",
   "success": true,
-  "projectFilePath": "/Users/margaret/Projects/WhichEpisodesApp/WhichEpisodesApp/WhichEpisodesApp.csproj",
+  "projectFilePath": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/WhichEpisodesApp.csproj",
   "expectedPackageFiles": [
     "/Users/margaret/.nuget/packages/system.net.http.json/7.0.1/system.net.http.json.7.0.1.nupkg.sha512",
     "/Users/margaret/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
