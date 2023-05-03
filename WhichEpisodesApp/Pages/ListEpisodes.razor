@@ -60,25 +60,30 @@ else
     public List<int> seasons = new List<int>();
     public List<int> numEpisodes = new List<int>();
     //list of episodes the actor appears in
-    public List<string> episodeList = new List<string>();
+    //public List<string> episodeList = new List<string>();
     //list of still from that episode
-    public List<string> episodeStills = new List<string>();
-    //tuple that contains episode name, season number, episode number, still, overview
-    //Tuple<string, int, int, string, string>[] episodeInfo;
+    //public List<string> episodeStills = new List<string>();
+    //list that contains episode name, season number, episode number, still, overview
     public List<(string, int, int, string, string)> episodeInfo = new List<(string, int, int, string, string)>();
 
     protected override async Task OnParametersSetAsync()
     {
+        //define variables from other parts of the project
         var showid = showId;
         var tmdbApiKey = Configuration["API_key"];
 
-        var request3 = new HttpRequestMessage(HttpMethod.Get,
-        $"https://api.themoviedb.org/3/tv/{showId}?api_key="+ tmdbApiKey + "&language=en-US");
+        //set request for tv show info
 
+        var request3 = new HttpRequestMessage(HttpMethod.Get,
+        $"https://api.themoviedb.org/3/tv/{showId}?api_key={tmdbApiKey}&language=en-US");
+
+        //create client
         var client3 = _clientFactory.CreateClient();
 
+        //await response
         HttpResponseMessage response3 = await client3.SendAsync(request3);
 
+        //if successful, save TV show info from API 
         if (response3.IsSuccessStatusCode)
         {
             tvshowinfo = await response3.Content.ReadFromJsonAsync<TVShowInfoModel>();
@@ -89,6 +94,7 @@ else
             errorString = $"There was an errror: {response3.ReasonPhrase}";
         }
 
+        //read that information and save in lists so it's readily available 
         saveTVShowInfoInLists();
 
         int j = 0;
@@ -163,6 +169,17 @@ else
         {
             errorString = $"error: {response4.ReasonPhrase}";
         }
+    }
+
+    async Task getTVShowInfo(string showId, string tmdbApiKey, HttpClient client)
+    {
+        var request3 = new HttpRequestMessage(HttpMethod.Get,
+        $"https://api.themoviedb.org/3/tv/{showId}?api_key="+ tmdbApiKey + "&language=en-US");
+
+        //await response
+        HttpResponseMessage response3 = await client.SendAsync(request3);
+
+
     }
 
 
