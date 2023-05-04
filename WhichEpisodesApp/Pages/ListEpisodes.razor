@@ -75,7 +75,7 @@ else
         //set request for tv show info
 
         var request3 = new HttpRequestMessage(HttpMethod.Get,
-        $"https://api.themoviedb.org/3/tv/{showId}?api_key={tmdbApiKey}&language=en-US");
+        $"https://api.themoviedb.org/3/tv/{showId}?api_key=" + tmdbApiKey + "&language=en-US");
 
         //create client
         var client3 = _clientFactory.CreateClient();
@@ -142,6 +142,29 @@ else
                         }
                     }
                 }
+                foreach (var d in episodecredits.episodeGuestStars)
+                {
+                    if (d.guestStarName == actorName)
+                    {
+                        //do the other get request to get episode info
+                        var request6 = new HttpRequestMessage(HttpMethod.Get,
+        $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{i}?api_key=" + tmdbApiKey + "&language=en-US");
+
+                        HttpResponseMessage response6 = await client3.SendAsync(request6);
+
+                        if (response6.IsSuccessStatusCode)
+                        {
+                            episodeinfo = await response6.Content.ReadFromJsonAsync<TVEpisodeInfoModel>();
+                            errorString = null;
+                            //var episodetuple = Tuple.Create(episodeinfo.episodeName, episodeinfo.seasonNumber, episodeinfo.episodeNumber, episodeinfo.stillPath, episodeinfo.overview);
+                            episodeInfo.Add((episodeinfo.episodeName, episodeinfo.seasonNumber, episodeinfo.episodeNumber, episodeinfo.stillPath, episodeinfo.overview));
+                        }
+                        else
+                        {
+                            errorString = $"error: {response6.ReasonPhrase}";
+                        }
+                    }
+                }
 
             }
             j++;
@@ -151,12 +174,12 @@ else
 
     //tried an async function to put in the loop...didn't work. something to follow up on
 
-    public async void SendRequestAsync(string showId, int counteri, int season)
+    public async void SendRequestAsync(string showId, string apiKey, int counteri, int season)
     {
         var client4 = _clientFactory.CreateClient();
 
         var request4 = new HttpRequestMessage(HttpMethod.Get,
-        $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{counteri}/credits?api_key=c8894f1bb561c45b2d987daeca10672d&language=en-US");
+        $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{counteri}/credits?api_key=" + apiKey + "&language=en-US");
 
         HttpResponseMessage response4 = await client4.SendAsync(request4);
 
