@@ -7,6 +7,9 @@ namespace WhichEpisodesApp.Models
 	{
         [JsonPropertyName("cast")]
         public EpisodeCast[] episodeCast { get; set; }
+
+        [JsonPropertyName("guest_stars")]
+        public EpisodeGuestStars[] episodeGuestStars { get; set; }
     }
 }
 

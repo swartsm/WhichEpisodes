@@ -13,44 +13,7 @@
   "ProjectWorkspaceState": {
     "TagHelpers": [
       {
-        "HashCode": 1150261895,
-        "Kind": "Components.Component",
-        "Name": "WhichEpisodesApp.Pages.Counter",
-        "AssemblyName": "WhichEpisodesApp",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Counter"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "WhichEpisodesApp.Pages.Counter",
-          "Common.TypeNamespace": "WhichEpisodesApp.Pages",
-          "Common.TypeNameIdentifier": "Counter"
-        }
-      },
-      {
-        "HashCode": 1392280542,
-        "Kind": "Components.Component",
-        "Name": "WhichEpisodesApp.Pages.Counter",
-        "AssemblyName": "WhichEpisodesApp",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "WhichEpisodesApp.Pages.Counter"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "WhichEpisodesApp.Pages.Counter",
-          "Common.TypeNamespace": "WhichEpisodesApp.Pages",
-          "Common.TypeNameIdentifier": "Counter",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": 1836751275,
+        "HashCode": 2052555132,
         "Kind": "Components.Component",
         "Name": "WhichEpisodesApp.Pages.FetchData",
         "AssemblyName": "WhichEpisodesApp",
@@ -68,7 +31,7 @@
         }
       },
       {
-        "HashCode": -273382288,
+        "HashCode": 1721554047,
         "Kind": "Components.Component",
         "Name": "WhichEpisodesApp.Pages.FetchData",
         "AssemblyName": "WhichEpisodesApp",
@@ -87,116 +50,39 @@
         }
       },
       {
-        "HashCode": 2048466549,
+        "HashCode": -1338524306,
         "Kind": "Components.Component",
-        "Name": "WhichEpisodesApp.Pages.ListEpisodes",
+        "Name": "WhichEpisodesApp.Pages.Counter",
         "AssemblyName": "WhichEpisodesApp",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "ListEpisodes"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "actorName",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "actorName",
-              "Common.GloballyQualifiedTypeName": "global::System.String"
-            }
-          },
-          {
-            "Kind": "Components.Component",
-            "Name": "showId",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "showId",
-              "Common.GloballyQualifiedTypeName": "global::System.String"
-            }
+            "TagName": "Counter"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "WhichEpisodesApp.Pages.ListEpisodes",
+          "Common.TypeName": "WhichEpisodesApp.Pages.Counter",
           "Common.TypeNamespace": "WhichEpisodesApp.Pages",
-          "Common.TypeNameIdentifier": "ListEpisodes"
+          "Common.TypeNameIdentifier": "Counter"
         }
       },
       {
-        "HashCode": -947887878,
+        "HashCode": -213922355,
         "Kind": "Components.Component",
-        "Name": "WhichEpisodesApp.Pages.ListEpisodes",
+        "Name": "WhichEpisodesApp.Pages.Counter",
         "AssemblyName": "WhichEpisodesApp",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "WhichEpisodesApp.Pages.ListEpisodes"
-          }
-        ],
-        "BoundAttributes": [
-          {
-            "Kind": "Components.Component",
-            "Name": "actorName",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "actorName",
-              "Common.GloballyQualifiedTypeName": "global::System.String"
-            }
-          },
-          {
-            "Kind": "Components.Component",
-            "Name": "showId",
-            "TypeName": "System.String",
-            "Metadata": {
-              "Common.PropertyName": "showId",
-              "Common.GloballyQualifiedTypeName": "global::System.String"
-            }
+            "TagName": "WhichEpisodesApp.Pages.Counter"
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "WhichEpisodesApp.Pages.ListEpisodes",
+          "Common.TypeName": "WhichEpisodesApp.Pages.Counter",
           "Common.TypeNamespace": "WhichEpisodesApp.Pages",
-          "Common.TypeNameIdentifier": "ListEpisodes",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": 140490707,
-        "Kind": "Components.Component",
-        "Name": "WhichEpisodesApp.Pages.Index",
-        "AssemblyName": "WhichEpisodesApp",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Index"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "WhichEpisodesApp.Pages.Index",
-          "Common.TypeNamespace": "WhichEpisodesApp.Pages",
-          "Common.TypeNameIdentifier": "Index"
-        }
-      },
-      {
-        "HashCode": 717138462,
-        "Kind": "Components.Component",
-        "Name": "WhichEpisodesApp.Pages.Index",
-        "AssemblyName": "WhichEpisodesApp",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "WhichEpisodesApp.Pages.Index"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "WhichEpisodesApp.Pages.Index",
-          "Common.TypeNamespace": "WhichEpisodesApp.Pages",
-          "Common.TypeNameIdentifier": "Index",
+          "Common.TypeNameIdentifier": "Counter",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
@@ -238,61 +124,79 @@
         }
       },
       {
-        "HashCode": 843000035,
+        "HashCode": -109939680,
         "Kind": "Components.Component",
-        "Name": "WhichEpisodesApp.Shared.SurveyPrompt",
+        "Name": "WhichEpisodesApp.Pages.ListEpisodes",
         "AssemblyName": "WhichEpisodesApp",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "SurveyPrompt"
+            "TagName": "ListEpisodes"
           }
         ],
         "BoundAttributes": [
           {
             "Kind": "Components.Component",
-            "Name": "Title",
+            "Name": "actorName",
             "TypeName": "System.String",
             "Metadata": {
-              "Common.PropertyName": "Title",
+              "Common.PropertyName": "actorName",
+              "Common.GloballyQualifiedTypeName": "global::System.String"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "showId",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "showId",
               "Common.GloballyQualifiedTypeName": "global::System.String"
             }
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "WhichEpisodesApp.Shared.SurveyPrompt",
-          "Common.TypeNamespace": "WhichEpisodesApp.Shared",
-          "Common.TypeNameIdentifier": "SurveyPrompt"
+          "Common.TypeName": "WhichEpisodesApp.Pages.ListEpisodes",
+          "Common.TypeNamespace": "WhichEpisodesApp.Pages",
+          "Common.TypeNameIdentifier": "ListEpisodes"
         }
       },
       {
-        "HashCode": -122322143,
+        "HashCode": 1978993923,
         "Kind": "Components.Component",
-        "Name": "WhichEpisodesApp.Shared.SurveyPrompt",
+        "Name": "WhichEpisodesApp.Pages.ListEpisodes",
         "AssemblyName": "WhichEpisodesApp",
         "CaseSensitive": true,
         "TagMatchingRules": [
           {
-            "TagName": "WhichEpisodesApp.Shared.SurveyPrompt"
+            "TagName": "WhichEpisodesApp.Pages.ListEpisodes"
           }
         ],
         "BoundAttributes": [
           {
             "Kind": "Components.Component",
-            "Name": "Title",
+            "Name": "actorName",
             "TypeName": "System.String",
             "Metadata": {
-              "Common.PropertyName": "Title",
+              "Common.PropertyName": "actorName",
+              "Common.GloballyQualifiedTypeName": "global::System.String"
+            }
+          },
+          {
+            "Kind": "Components.Component",
+            "Name": "showId",
+            "TypeName": "System.String",
+            "Metadata": {
+              "Common.PropertyName": "showId",
               "Common.GloballyQualifiedTypeName": "global::System.String"
             }
           }
         ],
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "WhichEpisodesApp.Shared.SurveyPrompt",
-          "Common.TypeNamespace": "WhichEpisodesApp.Shared",
-          "Common.TypeNameIdentifier": "SurveyPrompt",
+          "Common.TypeName": "WhichEpisodesApp.Pages.ListEpisodes",
+          "Common.TypeNamespace": "WhichEpisodesApp.Pages",
+          "Common.TypeNameIdentifier": "ListEpisodes",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },

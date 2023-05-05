@@ -93,6 +93,8 @@
             //"http://api.tmdb.org/3/search/person?api_key=c8894f1bb561c45b2d987daeca10672d&query=" + encodedName);
             var request = new HttpRequestMessage(HttpMethod.Get,
                 "http://api.tmdb.org/3/search/person?api_key=" + tmdbApiKey + "&query=" + encodedName);
+
+            //create HTTP client    
             var client = _clientFactory.CreateClient();
 
             HttpResponseMessage response = await client.SendAsync(request);
