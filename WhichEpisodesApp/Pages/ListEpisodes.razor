@@ -72,8 +72,14 @@ else
         var showid = showId;
         var tmdbApiKey = Configuration["API_key"];
 
-        //set request for tv show info
+        //create client
+        var client3 = _clientFactory.CreateClient();
 
+        //set request for tv show info
+        await getTVShowInfo(showid, tmdbApiKey, client3);
+
+
+        /*
         var request3 = new HttpRequestMessage(HttpMethod.Get,
         $"https://api.themoviedb.org/3/tv/{showId}?api_key=" + tmdbApiKey + "&language=en-US");
 
@@ -96,6 +102,7 @@ else
 
         //read that information and save in lists so it's readily available 
         saveTVShowInfoInLists();
+        */
 
         int j = 0;
         foreach (var season in seasons)
@@ -172,28 +179,6 @@ else
 
     }
 
-    //tried an async function to put in the loop...didn't work. something to follow up on
-
-    public async void SendRequestAsync(string showId, string apiKey, int counteri, int season)
-    {
-        var client4 = _clientFactory.CreateClient();
-
-        var request4 = new HttpRequestMessage(HttpMethod.Get,
-        $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{counteri}/credits?api_key=" + apiKey + "&language=en-US");
-
-        HttpResponseMessage response4 = await client4.SendAsync(request4);
-
-        if (response4.IsSuccessStatusCode)
-        {
-            episodecredits = await response4.Content.ReadFromJsonAsync<TVEpisodeCreditsModel>();
-            errorString = null;
-        }
-        else
-        {
-            errorString = $"error: {response4.ReasonPhrase}";
-        }
-    }
-
     async Task getTVShowInfo(string showId, string tmdbApiKey, HttpClient client)
     {
         var request3 = new HttpRequestMessage(HttpMethod.Get,
@@ -201,6 +186,20 @@ else
 
         //await response
         HttpResponseMessage response3 = await client.SendAsync(request3);
+
+        //if successful, save TV show info from API 
+        if (response3.IsSuccessStatusCode)
+        {
+            tvshowinfo = await response3.Content.ReadFromJsonAsync<TVShowInfoModel>();
+            errorString = null;
+        }
+        else
+        {
+            errorString = $"There was an errror: {response3.ReasonPhrase}";
+        }
+
+        //read that information and save in lists so it's readily available 
+        saveTVShowInfoInLists();
 
 
     }
