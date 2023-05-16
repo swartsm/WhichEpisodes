@@ -78,104 +78,7 @@ else
         //set request for tv show info
         await getTVShowInfo(showid, tmdbApiKey, client3);
 
-
-        /*
-        var request3 = new HttpRequestMessage(HttpMethod.Get,
-        $"https://api.themoviedb.org/3/tv/{showId}?api_key=" + tmdbApiKey + "&language=en-US");
-
-        //create client
-        var client3 = _clientFactory.CreateClient();
-
-        //await response
-        HttpResponseMessage response3 = await client3.SendAsync(request3);
-
-        //if successful, save TV show info from API 
-        if (response3.IsSuccessStatusCode)
-        {
-            tvshowinfo = await response3.Content.ReadFromJsonAsync<TVShowInfoModel>();
-            errorString = null;
-        }
-        else
-        {
-            errorString = $"There was an errror: {response3.ReasonPhrase}";
-        }
-
-        //read that information and save in lists so it's readily available 
-        saveTVShowInfoInLists();
-        */
-
-        int j = 0;
-        foreach (var season in seasons)
-        {
-            //int seasonNum = seasons[j];
-            for (int i = 1; i <= numEpisodes[j]; i++)
-            {
-                var request4 = new HttpRequestMessage(HttpMethod.Get,
-        $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{i}/credits?api_key=" + tmdbApiKey + "&language=en-US");
-
-                HttpResponseMessage response4 = await client3.SendAsync(request4);
-
-                if (response4.IsSuccessStatusCode)
-                {
-                    episodecredits = await response4.Content.ReadFromJsonAsync<TVEpisodeCreditsModel>();
-                    errorString = null;
-                }
-                else
-                {
-                    errorString = $"error: {response4.ReasonPhrase}";
-                }
-
-                //check that actor is in episode
-                foreach (var c in episodecredits.episodeCast)
-                {
-                    if (c.actorName == actorName)
-                    {
-                        //do the other get request to get episode info
-                        var request5 = new HttpRequestMessage(HttpMethod.Get,
-        $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{i}?api_key=" + tmdbApiKey + "&language=en-US");
-
-                        HttpResponseMessage response5 = await client3.SendAsync(request5);
-
-                        if (response5.IsSuccessStatusCode)
-                        {
-                            episodeinfo = await response5.Content.ReadFromJsonAsync<TVEpisodeInfoModel>();
-                            errorString = null;
-                            //var episodetuple = Tuple.Create(episodeinfo.episodeName, episodeinfo.seasonNumber, episodeinfo.episodeNumber, episodeinfo.stillPath, episodeinfo.overview);
-                            episodeInfo.Add((episodeinfo.episodeName, episodeinfo.seasonNumber, episodeinfo.episodeNumber, episodeinfo.stillPath, episodeinfo.overview));
-                        }
-                        else
-                        {
-                            errorString = $"error: {response5.ReasonPhrase}";
-                        }
-                    }
-                }
-                foreach (var d in episodecredits.episodeGuestStars)
-                {
-                    if (d.guestStarName == actorName)
-                    {
-                        //do the other get request to get episode info
-                        var request6 = new HttpRequestMessage(HttpMethod.Get,
-        $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{i}?api_key=" + tmdbApiKey + "&language=en-US");
-
-                        HttpResponseMessage response6 = await client3.SendAsync(request6);
-
-                        if (response6.IsSuccessStatusCode)
-                        {
-                            episodeinfo = await response6.Content.ReadFromJsonAsync<TVEpisodeInfoModel>();
-                            errorString = null;
-                            //var episodetuple = Tuple.Create(episodeinfo.episodeName, episodeinfo.seasonNumber, episodeinfo.episodeNumber, episodeinfo.stillPath, episodeinfo.overview);
-                            episodeInfo.Add((episodeinfo.episodeName, episodeinfo.seasonNumber, episodeinfo.episodeNumber, episodeinfo.stillPath, episodeinfo.overview));
-                        }
-                        else
-                        {
-                            errorString = $"error: {response6.ReasonPhrase}";
-                        }
-                    }
-                }
-
-            }
-            j++;
-        }
+        await searchCast(showId, tmdbApiKey, client3);
 
     }
 
@@ -202,6 +105,82 @@ else
         saveTVShowInfoInLists();
 
 
+    }
+
+    async Task searchCast(string showId, string tmdbApiKey, HttpClient client)
+    {
+        int j = 0;
+        foreach (var season in seasons)
+        {
+            //int seasonNum = seasons[j];
+            for (int i = 1; i <= numEpisodes[j]; i++)
+            {
+                var request4 = new HttpRequestMessage(HttpMethod.Get,
+        $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{i}/credits?api_key=" + tmdbApiKey + "&language=en-US");
+
+                HttpResponseMessage response4 = await client.SendAsync(request4);
+
+                if (response4.IsSuccessStatusCode)
+                {
+                    episodecredits = await response4.Content.ReadFromJsonAsync<TVEpisodeCreditsModel>();
+                    errorString = null;
+                }
+                else
+                {
+                    errorString = $"error: {response4.ReasonPhrase}";
+                }
+
+                //check that actor is in episode
+                foreach (var c in episodecredits.episodeCast)
+                {
+                    if (c.actorName == actorName)
+                    {
+                        //do the other get request to get episode info
+                        var request5 = new HttpRequestMessage(HttpMethod.Get,
+        $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{i}?api_key=" + tmdbApiKey + "&language=en-US");
+
+                        HttpResponseMessage response5 = await client.SendAsync(request5);
+
+                        if (response5.IsSuccessStatusCode)
+                        {
+                            episodeinfo = await response5.Content.ReadFromJsonAsync<TVEpisodeInfoModel>();
+                            errorString = null;
+                            //var episodetuple = Tuple.Create(episodeinfo.episodeName, episodeinfo.seasonNumber, episodeinfo.episodeNumber, episodeinfo.stillPath, episodeinfo.overview);
+                            episodeInfo.Add((episodeinfo.episodeName, episodeinfo.seasonNumber, episodeinfo.episodeNumber, episodeinfo.stillPath, episodeinfo.overview));
+                        }
+                        else
+                        {
+                            errorString = $"error: {response5.ReasonPhrase}";
+                        }
+                    }
+                }
+                foreach (var d in episodecredits.episodeGuestStars)
+                {
+                    if (d.guestStarName == actorName)
+                    {
+                        //do the other get request to get episode info
+                        var request6 = new HttpRequestMessage(HttpMethod.Get,
+        $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{i}?api_key=" + tmdbApiKey + "&language=en-US");
+
+                        HttpResponseMessage response6 = await client.SendAsync(request6);
+
+                        if (response6.IsSuccessStatusCode)
+                        {
+                            episodeinfo = await response6.Content.ReadFromJsonAsync<TVEpisodeInfoModel>();
+                            errorString = null;
+                            //var episodetuple = Tuple.Create(episodeinfo.episodeName, episodeinfo.seasonNumber, episodeinfo.episodeNumber, episodeinfo.stillPath, episodeinfo.overview);
+                            episodeInfo.Add((episodeinfo.episodeName, episodeinfo.seasonNumber, episodeinfo.episodeNumber, episodeinfo.stillPath, episodeinfo.overview));
+                        }
+                        else
+                        {
+                            errorString = $"error: {response6.ReasonPhrase}";
+                        }
+                    }
+                }
+
+            }
+            j++;
+        }
     }
 
 
