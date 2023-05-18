@@ -72,16 +72,23 @@ else
         var showid = showId;
         var tmdbApiKey = Configuration["API_key"];
 
-        //set request for tv show info
-
-        var request3 = new HttpRequestMessage(HttpMethod.Get,
-        $"https://api.themoviedb.org/3/tv/{showId}?api_key=" + tmdbApiKey + "&language=en-US");
-
         //create client
         var client3 = _clientFactory.CreateClient();
 
+        //set request for tv show info
+        await getTVShowInfo(showid, tmdbApiKey, client3);
+
+        await searchCast(showId, tmdbApiKey, client3);
+
+    }
+
+    async Task getTVShowInfo(string showId, string tmdbApiKey, HttpClient client)
+    {
+        var request3 = new HttpRequestMessage(HttpMethod.Get,
+        $"https://api.themoviedb.org/3/tv/{showId}?api_key="+ tmdbApiKey + "&language=en-US");
+
         //await response
-        HttpResponseMessage response3 = await client3.SendAsync(request3);
+        HttpResponseMessage response3 = await client.SendAsync(request3);
 
         //if successful, save TV show info from API 
         if (response3.IsSuccessStatusCode)
@@ -97,6 +104,11 @@ else
         //read that information and save in lists so it's readily available 
         saveTVShowInfoInLists();
 
+
+    }
+
+    async Task searchCast(string showId, string tmdbApiKey, HttpClient client)
+    {
         int j = 0;
         foreach (var season in seasons)
         {
@@ -106,7 +118,7 @@ else
                 var request4 = new HttpRequestMessage(HttpMethod.Get,
         $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{i}/credits?api_key=" + tmdbApiKey + "&language=en-US");
 
-                HttpResponseMessage response4 = await client3.SendAsync(request4);
+                HttpResponseMessage response4 = await client.SendAsync(request4);
 
                 if (response4.IsSuccessStatusCode)
                 {
@@ -127,7 +139,7 @@ else
                         var request5 = new HttpRequestMessage(HttpMethod.Get,
         $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{i}?api_key=" + tmdbApiKey + "&language=en-US");
 
-                        HttpResponseMessage response5 = await client3.SendAsync(request5);
+                        HttpResponseMessage response5 = await client.SendAsync(request5);
 
                         if (response5.IsSuccessStatusCode)
                         {
@@ -150,7 +162,7 @@ else
                         var request6 = new HttpRequestMessage(HttpMethod.Get,
         $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{i}?api_key=" + tmdbApiKey + "&language=en-US");
 
-                        HttpResponseMessage response6 = await client3.SendAsync(request6);
+                        HttpResponseMessage response6 = await client.SendAsync(request6);
 
                         if (response6.IsSuccessStatusCode)
                         {
@@ -169,41 +181,9 @@ else
             }
             j++;
         }
-
     }
 
-    //tried an async function to put in the loop...didn't work. something to follow up on
-
-    public async void SendRequestAsync(string showId, string apiKey, int counteri, int season)
-    {
-        var client4 = _clientFactory.CreateClient();
-
-        var request4 = new HttpRequestMessage(HttpMethod.Get,
-        $"https://api.themoviedb.org/3/tv/{showId}/season/{season}/episode/{counteri}/credits?api_key=" + apiKey + "&language=en-US");
-
-        HttpResponseMessage response4 = await client4.SendAsync(request4);
-
-        if (response4.IsSuccessStatusCode)
-        {
-            episodecredits = await response4.Content.ReadFromJsonAsync<TVEpisodeCreditsModel>();
-            errorString = null;
-        }
-        else
-        {
-            errorString = $"error: {response4.ReasonPhrase}";
-        }
-    }
-
-    async Task getTVShowInfo(string showId, string tmdbApiKey, HttpClient client)
-    {
-        var request3 = new HttpRequestMessage(HttpMethod.Get,
-        $"https://api.themoviedb.org/3/tv/{showId}?api_key="+ tmdbApiKey + "&language=en-US");
-
-        //await response
-        HttpResponseMessage response3 = await client.SendAsync(request3);
-
-
-    }
+   // public static async Task
 
 
     void saveTVShowInfoInLists()
