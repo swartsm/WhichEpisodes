@@ -41,6 +41,7 @@ h4 {
     text-align: center;
 }
 
+/* dot-hourglass CSS code from here: https://codepen.io/nzbin/pen/GGrXbp */
 .dot-hourglass {
     position: fixed;
     display: inline-block;
@@ -51,7 +52,6 @@ h4 {
     background-color: hsl(0deg, 100%, 0%);
     color: transparent;
     margin: -1px 0;
-    /*filter: blur(2px);*/
     transform-origin: 5px 20px;
     animation: dot-hourglass 2.4s infinite ease-in-out;
     animation-delay: 0.6s;
@@ -69,7 +69,6 @@ h4 {
     border-radius: 6px;
     background-color: hsl(0deg, 100%, 0%);
     color: transparent;
-    /*filter: blur(2px);*/
   }
   .dot-hourglass::before {
     top: 30px;
@@ -113,35 +112,6 @@ h4 {
     }
   }
 
-.lds-dual-ring {
-    position: fixed;
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    left: 50%;
-    top: 25%;
-    transform: translate(-50%, -50%);
-}
-
-.lds-dual-ring:after {
-    content: " ";
-    display: block;
-    border: 6px solid silver;
-    border-color: black transparent black transparent;
-    width: 35px;
-    height: 35px;
-    margin: 8px;
-    animation: lds-dual-ring 1.2s linear infinite;
-}
-
-@keyframes lds-dual-ring {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
 
 h1:focus {
     outline: none;
