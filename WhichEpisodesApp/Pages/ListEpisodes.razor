@@ -19,8 +19,8 @@
 
 @if (tvshowinfo is null)
 {
-    @*<div class="h4">loading...</div>*@
-    <div class="lds-dual-ring"></div>
+    <h4>wait time is proportional to chosen show's total episode count</h4>
+    <div class="dot-hourglass"></div>
 }
 else
 {
@@ -59,10 +59,7 @@ else
 
     public List<int> seasons = new List<int>();
     public List<int> numEpisodes = new List<int>();
-    //list of episodes the actor appears in
-    //public List<string> episodeList = new List<string>();
-    //list of still from that episode
-    //public List<string> episodeStills = new List<string>();
+   
     //list that contains episode name, season number, episode number, still, overview
     public List<(string, int, int, string, string)> episodeInfo = new List<(string, int, int, string, string)>();
 
@@ -109,10 +106,10 @@ else
 
     async Task searchCast(string showId, string tmdbApiKey, HttpClient client)
     {
+        //j counter keeps track of episode num. in the API episode number can s
         int j = 0;
         foreach (var season in seasons)
         {
-            //int seasonNum = seasons[j];
             for (int i = 1; i <= numEpisodes[j]; i++)
             {
                 var request4 = new HttpRequestMessage(HttpMethod.Get,
@@ -182,9 +179,6 @@ else
             j++;
         }
     }
-
-   // public static async Task
-
 
     void saveTVShowInfoInLists()
     {

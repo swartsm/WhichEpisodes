@@ -29,47 +29,89 @@ h1 {
     font-family: 'Montserrat', serif;
 }
 
-h2 {
+h2, h3, h4 {
     text-align: center;
 }
 
-h3 {
-    text-align:center;
+h4 {
+    text-align: center;
 }
 
 .actor-input {
     text-align: center;
 }
 
-.lds-dual-ring {
+/* dot-hourglass CSS code from here: https://codepen.io/nzbin/pen/GGrXbp */
+.dot-hourglass {
     position: fixed;
     display: inline-block;
-    width: 80px;
-    height: 80px;
+    top: -15px;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: hsl(0deg, 100%, 0%);
+    color: transparent;
+    margin: -1px 0;
+    transform-origin: 5px 20px;
+    animation: dot-hourglass 2.4s infinite ease-in-out;
+    animation-delay: 0.6s;
     left: 50%;
     top: 25%;
-    transform: translate(-50%, -50%);
-}
-
-.lds-dual-ring:after {
-    content: " ";
-    display: block;
-    border: 6px solid silver;
-    border-color: black transparent black transparent;
-    width: 55px;
-    height: 55px;
-    margin: 8px;
-    animation: lds-dual-ring 1.2s linear infinite;
-}
-
-@keyframes lds-dual-ring {
+  }
+  .dot-hourglass::before, .dot-hourglass::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: hsl(0deg, 100%, 0%);
+    color: transparent;
+  }
+  .dot-hourglass::before {
+    top: 30px;
+  }
+  .dot-hourglass::after {
+    animation: dot-hourglass-after 2.4s infinite cubic-bezier(0.65, 0.05, 0.36, 1);
+  }
+  
+  @keyframes dot-hourglass {
     0% {
-        transform: rotate(0deg);
+      transform: rotateZ(0deg);
+    }
+    25% {
+      transform: rotateZ(180deg);
+    }
+    50% {
+      transform: rotateZ(180deg);
+    }
+    75% {
+      transform: rotateZ(360deg);
     }
     100% {
-        transform: rotate(360deg);
+      transform: rotateZ(360deg);
     }
-}
+  }
+  @keyframes dot-hourglass-after {
+    0% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(30px);
+    }
+    50% {
+      transform: translateY(30px);
+    }
+    75% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
 
 h1:focus {
     outline: none;
