@@ -5,6 +5,18 @@
       "PackagePath": "staticwebassets/WhichEpisodesApp.bundle.scp.css"
     },
     {
+      "Id": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/Images/blue_long_2.svg",
+      "PackagePath": "staticwebassets/Images/blue_long_2.svg"
+    },
+    {
+      "Id": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/Images/kiwi.png.webp",
+      "PackagePath": "staticwebassets/Images/kiwi.png.webp"
+    },
+    {
+      "Id": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/Images/test.jpg",
+      "PackagePath": "staticwebassets/Images/test.jpg"
+    },
+    {
       "Id": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/css/bootstrap/bootstrap.min.css",
       "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css"
     },

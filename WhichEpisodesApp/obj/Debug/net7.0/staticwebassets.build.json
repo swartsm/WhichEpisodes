@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/B7niOYZ+HmHCWpuID37dtxJ06HWNzDnzlxwF5UgI8k=",
+  "Hash": "wGJ5oCPGZI7VYilctCseB9w+MjICcKqWiWTdmrSsvhQ=",
   "Source": "WhichEpisodesApp",
   "BasePath": "_content/WhichEpisodesApp",
   "Mode": "Default",
@@ -270,6 +270,57 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.png"
+    },
+    {
+      "Identity": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/Images/blue_long_2.svg",
+      "SourceId": "WhichEpisodesApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/",
+      "BasePath": "_content/WhichEpisodesApp",
+      "RelativePath": "Images/blue_long_2.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Images/blue_long_2.svg"
+    },
+    {
+      "Identity": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/Images/kiwi.png.webp",
+      "SourceId": "WhichEpisodesApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/",
+      "BasePath": "_content/WhichEpisodesApp",
+      "RelativePath": "Images/kiwi.png.webp",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Images/kiwi.png.webp"
+    },
+    {
+      "Identity": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/Images/test.jpg",
+      "SourceId": "WhichEpisodesApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/",
+      "BasePath": "_content/WhichEpisodesApp",
+      "RelativePath": "Images/test.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Images/test.jpg"
     }
   ]
 }

@@ -41,6 +41,11 @@ h4 {
     text-align: center;
 }
 
+.empty-space {
+    height: 400px;
+    min-height: 400px;
+}
+
 /* dot-hourglass CSS code from here: https://codepen.io/nzbin/pen/GGrXbp */
 .dot-hourglass {
     position: fixed;

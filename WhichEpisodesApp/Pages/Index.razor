@@ -13,15 +13,17 @@
    
 </head>
 <body>
-    <div class="allPagesStyle">
         <h1>Enter a TV Actor's name</h1>
     <div class="actor-input">
         <search type="text" id="textEntry" name="textEntry">Search for an actor:</search>
         <input type="text" @bind="enteredActorName" />
         <button class="btn btn-warning" @onclick="OnInitializedAsync">Submit</button>
     </div>
-
-
+    <div class="empty-space">
+    @*
+    <img src="/test.jpg" alt="tmdb logo" />
+    <img src="@String.Format("/test.jpg")" alt="tmdb logo" />
+    *@
 
     @if (string.IsNullOrWhiteSpace(errorString) == false)
     {
@@ -55,6 +57,15 @@
 
     }
 </div>
+<footer>
+    @*<img src="/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/Images/blue_long_2.svg" alt="tmdb logo" >
+    <img src="~/Images/kiwi.png.webp" alt="tmdb logo" />
+    <img src="~/test.jpg" alt="tmdb logo" />
+    <img src="~/WhichEpisodesApp/wwwroot/Images/test.jpg" />
+    <object data="/Images/blue_long_2.svg" type="image/svg+xml"></object>*@
+    <img src="Images/blue_long_2.svg" />
+</footer>
+
 </body>
 
 @code {
