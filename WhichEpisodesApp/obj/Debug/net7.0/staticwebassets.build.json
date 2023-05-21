@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "wGJ5oCPGZI7VYilctCseB9w+MjICcKqWiWTdmrSsvhQ=",
+  "Hash": "LZkkaSbb4GFBLDHRk7qY5c5vq52RoISmFA71uYx1l74=",
   "Source": "WhichEpisodesApp",
   "BasePath": "_content/WhichEpisodesApp",
   "Mode": "Default",
@@ -287,40 +287,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/Images/blue_long_2.svg"
-    },
-    {
-      "Identity": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/Images/kiwi.png.webp",
-      "SourceId": "WhichEpisodesApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/",
-      "BasePath": "_content/WhichEpisodesApp",
-      "RelativePath": "Images/kiwi.png.webp",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/Images/kiwi.png.webp"
-    },
-    {
-      "Identity": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/Images/test.jpg",
-      "SourceId": "WhichEpisodesApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/",
-      "BasePath": "_content/WhichEpisodesApp",
-      "RelativePath": "Images/test.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/Images/test.jpg"
     }
   ]
 }
