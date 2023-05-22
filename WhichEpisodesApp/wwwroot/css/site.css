@@ -9,6 +9,7 @@ html, body {
     overflow-x: hidden;
 }
 
+
 body > * {
     flex-shrink: 0;
 }
@@ -48,7 +49,7 @@ h4 {
 
 .main-space {
     overflow: auto;
-    padding-bottom: 150px;
+    padding-bottom: 200px;
 }
 
 footer {
