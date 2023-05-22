@@ -13,15 +13,14 @@
    
 </head>
 <body>
-    <div class="allPagesStyle">
-        <h1>Enter a TV Actor's name</h1>
+    <div class="wrapper">
+    <h1>Enter a TV Actor's name</h1>
     <div class="actor-input">
         <search type="text" id="textEntry" name="textEntry">Search for an actor:</search>
         <input type="text" @bind="enteredActorName" />
         <button class="btn btn-warning" @onclick="OnInitializedAsync">Submit</button>
     </div>
-
-
+    <div class="main-space">
 
     @if (string.IsNullOrWhiteSpace(errorString) == false)
     {
@@ -55,6 +54,11 @@
 
     }
 </div>
+</div>
+<footer>
+    <img src="Images/blue_long_2.svg" />
+</footer>
+
 </body>
 
 @code {

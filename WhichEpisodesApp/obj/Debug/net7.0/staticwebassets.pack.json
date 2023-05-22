@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets/WhichEpisodesApp.bundle.scp.css"
     },
     {
+      "Id": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/Images/blue_long_2.svg",
+      "PackagePath": "staticwebassets/Images/blue_long_2.svg"
+    },
+    {
       "Id": "/Users/margaret/Documents/csharp/WhichEpisodesApp/WhichEpisodes/WhichEpisodesApp/wwwroot/css/bootstrap/bootstrap.min.css",
       "PackagePath": "staticwebassets/css/bootstrap/bootstrap.min.css"
     },

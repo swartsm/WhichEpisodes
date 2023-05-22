@@ -6,7 +6,9 @@ html, body {
     display: flex;
     flex-direction: column;
     background-color: lightblue;
+    overflow-x: hidden;
 }
+
 
 body > * {
     flex-shrink: 0;
@@ -39,6 +41,22 @@ h4 {
 
 .actor-input {
     text-align: center;
+}
+
+.wrapper {
+    min-height: 100%;
+}
+
+.main-space {
+    overflow: auto;
+    padding-bottom: 200px;
+}
+
+footer {
+    position: relative;
+    margin-top: 150px;
+    height: 150px;
+    clear: both;
 }
 
 /* dot-hourglass CSS code from here: https://codepen.io/nzbin/pen/GGrXbp */
