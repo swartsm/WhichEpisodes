@@ -80,9 +80,14 @@
     public List<int> actorIdList = new List<int>();
     public List<string> actorNameList = new List<string>();
 
+    private string defaultConnection;
+
 
     protected override async Task OnInitializedAsync()
     {
+
+        //for web hosting
+        defaultConnection = Configuration.GetConnectionString("Default") ?? "unknown";
 
         var tmdbApiKey = Configuration["API_key"];
 
