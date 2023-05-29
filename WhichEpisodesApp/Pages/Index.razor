@@ -32,6 +32,15 @@
         }
         else
         {
+        @foreach (var x in actorIdList)
+        {
+            <h3>@x</h3>
+        }
+        @foreach (var y in actor.results)
+        {
+            <h4>@y.popularity</h4>
+        }
+            /*
         <h3>@actorNameFromAPI</h3>
         <div class="container">
             <div class="row">
@@ -51,7 +60,7 @@
                 }
             </div>
         </div>
-
+    */
     }
 </div>
 </div>
@@ -135,6 +144,7 @@
 
             //the top result is the most popular one. So the first name/id is the one we will go with
             //we are choosing the "best" result for the user
+            /*
             actorNameFromAPI = actorNameList[0];
 
             //search the actor's TV credits
@@ -155,7 +165,7 @@
                 errorString = $"There was an errror: {response2.ReasonPhrase}";
             }
 
-
+        */
 
         }
     }
