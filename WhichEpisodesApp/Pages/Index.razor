@@ -32,6 +32,7 @@
         }
         else
         {
+        <h3>@testrequest</h3>
         @foreach (var x in actorIdList)
         {
             <h3>@x</h3>
@@ -88,14 +89,11 @@
     public List<int> actorIdList = new List<int>();
     public List<string> actorNameList = new List<string>();
 
-    private string defaultConnection;
+    public string? testrequest;
 
 
     protected override async Task OnInitializedAsync()
     {
-
-        //for web hosting
-        defaultConnection = Configuration.GetConnectionString("Default") ?? "unknown";
 
         var tmdbApiKey = Configuration["API_key"];
 
@@ -110,6 +108,8 @@
             //"http://api.tmdb.org/3/search/person?api_key=c8894f1bb561c45b2d987daeca10672d&query=" + encodedName);
             var request = new HttpRequestMessage(HttpMethod.Get,
                 "http://api.tmdb.org/3/search/person?api_key=" + tmdbApiKey + "&query=" + encodedName);
+
+            testrequest = "http://api.tmdb.org/3/search/person?api_key=" + tmdbApiKey + "&query=" + encodedName;
 
             //create HTTP client    
             var client = _clientFactory.CreateClient();
