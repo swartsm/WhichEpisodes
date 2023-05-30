@@ -33,6 +33,7 @@
         else
         {
         <h3>@testrequest</h3>
+        /*
         @foreach (var x in actorIdList)
         {
             <h3>@x</h3>
@@ -41,6 +42,7 @@
         {
             <h4>@y.popularity</h4>
         }
+        */
             /*
         <h3>@actorNameFromAPI</h3>
         <div class="container">
@@ -59,7 +61,7 @@
                     </div>
 
                 }
-            </div>
+            </div> 
         </div>
     */
     }
@@ -125,7 +127,7 @@
             {
                 errorString = $"There was an errror: {response.ReasonPhrase}";
             }
-
+            /*
             //save actors with searched name and their Ids to lists
             try
             {
@@ -141,7 +143,7 @@
             {
                 errorString = $"error: {e}";
             }
-
+            */
             //the top result is the most popular one. So the first name/id is the one we will go with
             //we are choosing the "best" result for the user
             /*
