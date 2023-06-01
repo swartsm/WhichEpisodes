@@ -26,6 +26,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
 }
 
+//this code is from https://learn.microsoft.com/en-us/azure/key-vault/general/tutorial-net-create-vault-azure-web-app#configure-the-web-app-to-connect-to-key-vault
 SecretClientOptions options = new SecretClientOptions()
     {
         Retry =
@@ -36,9 +37,9 @@ SecretClientOptions options = new SecretClientOptions()
             Mode = RetryMode.Exponential
          }
     };
-var client = new SecretClient(new Uri("https://<your-unique-key-vault-name>.vault.azure.net/"), new DefaultAzureCredential(),options);
+var client = new SecretClient(new Uri("https://WhichEpisodesAPI.vault.azure.net/"), new DefaultAzureCredential(),options);
 
-KeyVaultSecret secret = client.GetSecret("<mySecret>");
+KeyVaultSecret secret = client.GetSecret("tmdbApiKey");
 
 string secretValue = secret.Value;
 

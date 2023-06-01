@@ -99,6 +99,8 @@
     {
 
         var tmdbApiKey = Configuration["API_key"];
+        
+        var apikey = Configuration[secret.Value];
 
         if (enteredActorName != null)
         {
@@ -112,7 +114,7 @@
             var request = new HttpRequestMessage(HttpMethod.Get,
                 "http://api.tmdb.org/3/search/person?api_key=" + tmdbApiKey + "&query=" + encodedName);
 
-            testrequest = "http://api.tmdb.org/3/search/person?api_key=" + tmdbApiKey + "&query=" + encodedName;
+            testrequest = "http://api.tmdb.org/3/search/person?api_key=" + secretValue + "&query=" + encodedName;
 
             //create HTTP client    
             var client = _clientFactory.CreateClient();
