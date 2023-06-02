@@ -4,6 +4,7 @@
 @inject IHttpClientFactory _clientFactory
 @inject NavigationManager NavigationManager
 @inject IConfiguration Configuration 
+@inject KeyVaultSecret _secret
 
 <PageTitle>Which Episodes</PageTitle>
 <head>
@@ -100,7 +101,7 @@
 
         var tmdbApiKey = Configuration["API_key"];
         
-        var apikey = Configuration[secret.Value];
+        var secretValue = _secret.Value;
 
         if (enteredActorName != null)
         {
