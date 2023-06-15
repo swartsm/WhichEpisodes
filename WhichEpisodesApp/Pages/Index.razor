@@ -26,7 +26,6 @@
 
     @if (string.IsNullOrWhiteSpace(errorString) == false)
     {
-        <h3>@testrequest</h3>
         <div class="h2">@errorString</div>
         }
         else if (actor is null)
@@ -35,7 +34,6 @@
         }
         else
         {
-        <h3>@testrequest</h3>
         /*
         @foreach (var x in actorIdList)
         {
@@ -46,7 +44,7 @@
             <h4>@y.popularity</h4>
         }
         */
-            /*
+            
         <h3>@actorNameFromAPI</h3>
         <div class="container">
             <div class="row">
@@ -66,7 +64,7 @@
                 }
             </div> 
         </div>
-    */
+    
     }
 </div>
 </div>
@@ -77,10 +75,6 @@
 </body>
 
 @code {
-
-    //var tmdbApiKey = _config["API_key"];
-    //public readonly IConfiguration _config;
-
 
     ActorModel actor;
     PersonTVCreditsModel tvcredits;
@@ -99,14 +93,10 @@
 
     protected override async Task OnInitializedAsync()
     {
-
-        var tmdbApiKey = Configuration["API_key"];
+        //for local use of user-secrets
+        //var tmdbApiKey = Configuration["API_key"];
 
         var keyvaultvalue = KeyVaultModel.keyVaultValue;
-
-        //string vaultApiKey = Configuration[secret.Value];
-        
-        //var secretValue = keyvaultsecret.Value;
 
         if (enteredActorName != null)
         {
@@ -158,7 +148,7 @@
 
             //search the actor's TV credits
             var request2 = new HttpRequestMessage(HttpMethod.Get,
-                "https://api.themoviedb.org/3/person/" + actorIdList[0] + "/tv_credits?api_key="+ tmdbApiKey + "&language=en-US");
+                "https://api.themoviedb.org/3/person/" + actorIdList[0] + "/tv_credits?api_key="+ keyvaultvalue + "&language=en-US");
 
             //var client2 = _clientFactory.CreateClient();
 
