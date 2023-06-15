@@ -5,6 +5,7 @@
 @inject IHttpClientFactory _clientFactory
 @inject NavigationManager NavigationManager
 @inject IConfiguration Configuration
+@inject KeyVaultModel keyvaultmodel
 
 <PageTitle>List Episodes</PageTitle>
 <head>
@@ -15,9 +16,10 @@
 <div class="wrapper">
 <div class="main-space">
 <button class="btn btn-warning" @onclick="returnHome">Return Home</button>
+<h3>Episode List</h3>
 <hr />
 
-<h3>Episode List</h3>
+@*<h3>Episode List</h3>*@
 
 @if (tvshowinfo is null)
 {
@@ -80,15 +82,18 @@ else
     {
         //define variables from other parts of the project
         var showid = showId;
-        var tmdbApiKey = Configuration["API_key"];
+        //for local use of user-secrets
+        //var tmdbApiKey = Configuration["API_key"];
+
+        var keyvaultvalue = KeyVaultModel.keyVaultValue;
 
         //create client
         var client3 = _clientFactory.CreateClient();
 
         //set request for tv show info
-        await getTVShowInfo(showid, tmdbApiKey, client3);
+        await getTVShowInfo(showid, keyvaultvalue, client3);
 
-        await searchCast(showId, tmdbApiKey, client3);
+        await searchCast(showId, keyvaultvalue, client3);
 
     }
 
@@ -155,7 +160,6 @@ else
                         {
                             episodeinfo = await response5.Content.ReadFromJsonAsync<TVEpisodeInfoModel>();
                             errorString = null;
-                            //var episodetuple = Tuple.Create(episodeinfo.episodeName, episodeinfo.seasonNumber, episodeinfo.episodeNumber, episodeinfo.stillPath, episodeinfo.overview);
                             episodeInfo.Add((episodeinfo.episodeName, episodeinfo.seasonNumber, episodeinfo.episodeNumber, episodeinfo.stillPath, episodeinfo.overview));
                         }
                         else
