@@ -4,6 +4,8 @@
 @inject IHttpClientFactory _clientFactory
 @inject NavigationManager NavigationManager
 @inject IConfiguration Configuration 
+@inject KeyVaultModel keyvaultmodel
+
 
 <PageTitle>Which Episodes</PageTitle>
 <head>
@@ -24,7 +26,6 @@
 
     @if (string.IsNullOrWhiteSpace(errorString) == false)
     {
-        <h3>@testrequest</h3>
         <div class="h2">@errorString</div>
         }
         else if (actor is null)
@@ -33,7 +34,6 @@
         }
         else
         {
-        <h3>@testrequest</h3>
         /*
         @foreach (var x in actorIdList)
         {
@@ -44,7 +44,7 @@
             <h4>@y.popularity</h4>
         }
         */
-            /*
+            
         <h3>@actorNameFromAPI</h3>
         <div class="container">
             <div class="row">
@@ -64,7 +64,7 @@
                 }
             </div> 
         </div>
-    */
+    
     }
 </div>
 </div>
@@ -75,10 +75,6 @@
 </body>
 
 @code {
-
-    //var tmdbApiKey = _config["API_key"];
-    //public readonly IConfiguration _config;
-
 
     ActorModel actor;
     PersonTVCreditsModel tvcredits;
@@ -97,8 +93,10 @@
 
     protected override async Task OnInitializedAsync()
     {
+        //for local use of user-secrets
+        //var tmdbApiKey = Configuration["API_key"];
 
-        var tmdbApiKey = Configuration["API_key"];
+        var keyvaultvalue = KeyVaultModel.keyVaultValue;
 
         if (enteredActorName != null)
         {
@@ -110,9 +108,7 @@
             //var request = new HttpRequestMessage(HttpMethod.Get,
             //"http://api.tmdb.org/3/search/person?api_key=c8894f1bb561c45b2d987daeca10672d&query=" + encodedName);
             var request = new HttpRequestMessage(HttpMethod.Get,
-                "http://api.tmdb.org/3/search/person?api_key=" + tmdbApiKey + "&query=" + encodedName);
-
-            testrequest = "http://api.tmdb.org/3/search/person?api_key=" + tmdbApiKey + "&query=" + encodedName;
+                "http://api.tmdb.org/3/search/person?api_key=" + keyvaultvalue + "&query=" + encodedName);
 
             //create HTTP client    
             var client = _clientFactory.CreateClient();
@@ -128,7 +124,7 @@
             {
                 errorString = $"There was an errror: {response.ReasonPhrase}";
             }
-            /*
+            
             //save actors with searched name and their Ids to lists
             try
             {
@@ -144,15 +140,15 @@
             {
                 errorString = $"error: {e}";
             }
-            */
+            
             //the top result is the most popular one. So the first name/id is the one we will go with
             //we are choosing the "best" result for the user
-            /*
+            
             actorNameFromAPI = actorNameList[0];
 
             //search the actor's TV credits
             var request2 = new HttpRequestMessage(HttpMethod.Get,
-                "https://api.themoviedb.org/3/person/" + actorIdList[0] + "/tv_credits?api_key="+ tmdbApiKey + "&language=en-US");
+                "https://api.themoviedb.org/3/person/" + actorIdList[0] + "/tv_credits?api_key="+ keyvaultvalue + "&language=en-US");
 
             //var client2 = _clientFactory.CreateClient();
 
@@ -168,7 +164,7 @@
                 errorString = $"There was an errror: {response2.ReasonPhrase}";
             }
 
-        */
+        
 
         }
     }
@@ -178,9 +174,6 @@
     //user to a new page that will show all the episodes the actor appears in
     void chooseTVShow(string actorName, int showId)
     {
-        //var id = showId;
-        //send showID to next page
-        //switch pages
         NavigationManager.NavigateTo($"/Episodes/{actorName}/{showId}");
     }
 
