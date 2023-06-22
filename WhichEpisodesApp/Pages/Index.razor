@@ -20,7 +20,7 @@
     <div class="actor-input">
         <search type="text" id="textEntry" name="textEntry">Search for an actor:</search>
         <input type="text" @bind="enteredActorName" />
-        <button class="btn btn-warning" @onclick="OnInitializedAsync">Submit</button>
+        <button type="submit" class="btn btn-warning" @onclick="OnInitializedAsync">Submit</button>
     </div>
     <div class="main-space">
 
@@ -45,7 +45,7 @@
         }
         */
             
-        <h3>@actorNameFromAPI</h3>
+        <h3>Select a television show to see which episodes @actorNameFromAPI apepared in</h3>
         <div class="container">
             <div class="row">
                 @foreach (var x in tvcredits.creditsCast)
