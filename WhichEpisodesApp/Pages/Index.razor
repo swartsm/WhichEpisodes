@@ -26,24 +26,29 @@
 
     @if (string.IsNullOrWhiteSpace(errorString) == false)
     {
-        <div class="h2">@errorString</div>
-        }
-        else if (actor is null)
-        {
-            <div></div>
-        }
-        else
-        {
-        /*
+    <div class="h2">@errorString</div>
+    }
+    else if (actor is null)
+    {
+        <div></div>
+    }
+    else
+    {
+       if(!actorShowIdList.Any()) 
+       {
+            <h3>No results. Enter actor's full name.</h3>
+       }
+       else 
+       {
         @foreach (var x in actorIdList)
         {
-            <h3>@x</h3>
+            <h3>actor @x</h3>
         }
-        @foreach (var y in actor.results)
+        @foreach (var y in actorShowIdList)
         {
-            <h4>@y.popularity</h4>
+            <h4>show id @y</h4>
         }
-        */
+        
             
         <h3>Select a television show to see which episodes @actorNameFromAPI apepared in</h3>
         <div class="container">
@@ -64,7 +69,7 @@
                 }
             </div> 
         </div>
-    
+       }
     }
 </div>
 </div>
@@ -87,6 +92,8 @@
     public string? actorNameFromAPI;
     public List<int> actorIdList = new List<int>();
     public List<string> actorNameList = new List<string>();
+
+    public List<int> actorShowIdList = new List<int>();
 
     public string? testrequest;
 
@@ -158,6 +165,11 @@
             {
                 tvcredits = await response2.Content.ReadFromJsonAsync<PersonTVCreditsModel>();
                 errorString = null;
+
+                foreach (var x in tvcredits.creditsCast)
+                {
+                    actorShowIdList.Add(x.showId);
+                }
             }
             else
             {
