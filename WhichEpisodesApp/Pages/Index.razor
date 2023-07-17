@@ -26,45 +26,58 @@
 
     @if (string.IsNullOrWhiteSpace(errorString) == false)
     {
-        <div class="h2">@errorString</div>
-        }
-        else if (actor is null)
+    <div class="h2">@errorString</div>
+    }
+    else if (actor is null)
+    {
+        <div></div>
+    }
+    else
+    {
+        if(!actorIdList.Any())
         {
-            <div></div>
+            <h3>No Results. Search Again.</h3>
         }
         else
         {
-        /*
-        @foreach (var x in actorIdList)
-        {
-            <h3>@x</h3>
-        }
-        @foreach (var y in actor.results)
-        {
-            <h4>@y.popularity</h4>
-        }
-        */
-            
-        <h3>Select a television show to see which episodes @actorNameFromAPI apepared in</h3>
-        <div class="container">
-            <div class="row">
-                @foreach (var x in tvcredits.creditsCast)
+            if(!actorShowIdList.Any()) 
+            {
+                <h3>No results. Enter actor's full name.</h3>
+            }
+            else 
+            {
+                /*
+                @foreach (var x in actorIdList)
                 {
-                    <div class="col-sm-4">
-                        @*<div class="card-columns-fluid">*@
-                        <div class="card">
-                            @*<div class="card-body">*@
-                            @*note this formatting to concatenate a string to get the poster path for each show*@
-                            <button class="btn btn-light" @onclick="@(e => chooseTVShow(@actorNameFromAPI, @x.showId))"> <img src="@String.Format("https://image.tmdb.org/t/p/w300{0}", x.posterPath)"></button>
-                            @*</div>*@
-                        </div>
-                        @*</div>*@
-                    </div>
-
+                    <h3>actor @x</h3>
                 }
-            </div> 
-        </div>
-    
+                @foreach (var y in actorShowIdList)
+                {
+                    <h4>show id @y</h4>
+                }
+                */
+            
+                <h3>Select a television show to see which episodes @actorNameFromAPI apepared in</h3>
+                <div class="container">
+                    <div class="row">
+                        @foreach (var x in tvcredits.creditsCast)
+                        {
+                            <div class="col-sm-4">
+                                @*<div class="card-columns-fluid">*@
+                                <div class="card">
+                                    @*<div class="card-body">*@
+                                    @*note this formatting to concatenate a string to get the poster path for each show*@
+                                    <button class="btn btn-light" @onclick="@(e => chooseTVShow(@actorNameFromAPI, @x.showId))"> <img src="@String.Format("https://image.tmdb.org/t/p/w300{0}", x.posterPath)"></button>
+                                    @*</div>*@
+                                </div>
+                                @*</div>*@
+                            </div>
+
+                        }
+                    </div> 
+                </div>
+            }
+        }
     }
 </div>
 </div>
@@ -87,6 +100,8 @@
     public string? actorNameFromAPI;
     public List<int> actorIdList = new List<int>();
     public List<string> actorNameList = new List<string>();
+
+    public List<int> actorShowIdList = new List<int>();
 
     public string? testrequest;
 
@@ -143,8 +158,10 @@
             
             //the top result is the most popular one. So the first name/id is the one we will go with
             //we are choosing the "best" result for the user
+            if(actorNameList.Any())
+            {   
+                actorNameFromAPI = actorNameList[0];
             
-            actorNameFromAPI = actorNameList[0];
 
             //search the actor's TV credits
             var request2 = new HttpRequestMessage(HttpMethod.Get,
@@ -158,13 +175,20 @@
             {
                 tvcredits = await response2.Content.ReadFromJsonAsync<PersonTVCreditsModel>();
                 errorString = null;
+
+                foreach (var x in tvcredits.creditsCast)
+                {
+                    actorShowIdList.Add(x.showId);
+                }
             }
             else
             {
                 errorString = $"There was an errror: {response2.ReasonPhrase}";
             }
 
-        
+            
+            }
+           
 
         }
     }
