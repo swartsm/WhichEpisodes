@@ -34,42 +34,49 @@
     }
     else
     {
-       if(!actorShowIdList.Any()) 
-       {
-            <h3>No results. Enter actor's full name.</h3>
-       }
-       else 
-       {
-        @foreach (var x in actorIdList)
+        if(!actorIdList.Any())
         {
-            <h3>actor @x</h3>
+            <h3>No Results. Search Again.</h3>
         }
-        @foreach (var y in actorShowIdList)
+        else
         {
-            <h4>show id @y</h4>
-        }
+            if(!actorShowIdList.Any()) 
+            {
+                <h3>No results. Enter actor's full name.</h3>
+            }
+            else 
+            {
+                @foreach (var x in actorIdList)
+                {
+                    <h3>actor @x</h3>
+                }
+                @foreach (var y in actorShowIdList)
+                {
+                    <h4>show id @y</h4>
+                }
         
             
-        <h3>Select a television show to see which episodes @actorNameFromAPI apepared in</h3>
-        <div class="container">
-            <div class="row">
-                @foreach (var x in tvcredits.creditsCast)
-                {
-                    <div class="col-sm-4">
-                        @*<div class="card-columns-fluid">*@
-                        <div class="card">
-                            @*<div class="card-body">*@
-                            @*note this formatting to concatenate a string to get the poster path for each show*@
-                            <button class="btn btn-light" @onclick="@(e => chooseTVShow(@actorNameFromAPI, @x.showId))"> <img src="@String.Format("https://image.tmdb.org/t/p/w300{0}", x.posterPath)"></button>
-                            @*</div>*@
-                        </div>
-                        @*</div>*@
-                    </div>
+                <h3>Select a television show to see which episodes @actorNameFromAPI apepared in</h3>
+                <div class="container">
+                    <div class="row">
+                        @foreach (var x in tvcredits.creditsCast)
+                        {
+                            <div class="col-sm-4">
+                                @*<div class="card-columns-fluid">*@
+                                <div class="card">
+                                    @*<div class="card-body">*@
+                                    @*note this formatting to concatenate a string to get the poster path for each show*@
+                                    <button class="btn btn-light" @onclick="@(e => chooseTVShow(@actorNameFromAPI, @x.showId))"> <img src="@String.Format("https://image.tmdb.org/t/p/w300{0}", x.posterPath)"></button>
+                                    @*</div>*@
+                                </div>
+                                @*</div>*@
+                            </div>
 
-                }
-            </div> 
-        </div>
-       }
+                        }
+                    </div> 
+                </div>
+            }
+        }
     }
 </div>
 </div>
@@ -150,8 +157,10 @@
             
             //the top result is the most popular one. So the first name/id is the one we will go with
             //we are choosing the "best" result for the user
+            if(actorNameList.Any())
+            {   
+                actorNameFromAPI = actorNameList[0];
             
-            actorNameFromAPI = actorNameList[0];
 
             //search the actor's TV credits
             var request2 = new HttpRequestMessage(HttpMethod.Get,
@@ -176,7 +185,9 @@
                 errorString = $"There was an errror: {response2.ReasonPhrase}";
             }
 
-        
+            
+            }
+           
 
         }
     }
