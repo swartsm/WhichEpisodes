@@ -57,7 +57,7 @@
                 }
                 */
             
-                <h3>Select a television show to see which episodes @actorNameFromAPI apepared in</h3>
+                <h3>Select a television show to see which episodes @actorNameFromAPI appeared in</h3>
                 <div class="container">
                     <div class="row">
                         @foreach (var x in tvcredits.creditsCast)
@@ -176,6 +176,7 @@
                 tvcredits = await response2.Content.ReadFromJsonAsync<PersonTVCreditsModel>();
                 errorString = null;
 
+                actorShowIdList.Clear();
                 foreach (var x in tvcredits.creditsCast)
                 {
                     actorShowIdList.Add(x.showId);
